@@ -24,16 +24,14 @@ const checkInput = () => {
         // metoda slice() sprawdza ostatni znak w stringu, w tym przypadku sprawdzamy czy mamy znak zapytania na końcu zdania
         generateAnswer();
         error.textContent = '';
-        imgBall.classList.remove('shake-animation');
     } else if (question.value !== '' && question.value.slice(-1) !== '?') {
         error.textContent = 'Pytanie musi być zakończone znakiem "?".';
         answer.textContent = '';
-        imgBall.classList.remove('shake-animation');
     } else {
         error.textContent = 'Musisz zadać jakieś pytanie';
         answer.textContent = ''
-        imgBall.classList.remove('shake-animation');
     }
+    imgBall.classList.remove('shake-animation');
 }
 
 //1.
@@ -49,3 +47,4 @@ const generateAnswer = () => {
 
 
 imgBall.addEventListener('click', animationBall);
+//kolejność odpalania fukncji jest tutaj ważna, pierwsza jest odnośnie animacji i zawiera w sobie kolejną funkcję do wywołania
