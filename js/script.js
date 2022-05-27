@@ -20,16 +20,28 @@ function animationBallEnd(e) {
 }
 
 
+// 2.
+const checkInput = () => {
+    if (question.value !== '' && question.value.slice(-1) === '?') {
+        // metoda slice() sprawdza ostatni znak w stringu, w tym przypadku sprawdzamy czy mamy znak zapytania na końcu zdania
+        generateAnswer();
+        error.textContent = '';
+    } else if (question.value !== '' && question.value.slice(-1) !== '?') {
+        error.textContent = 'Pytanie musi być zakończone znakiem "?".';
+    }
+}
+
+
+//1.
 const generateAnswer = () => {
-    const number = Math.floor(Math.random() * 9)  
+    const number = Math.floor(Math.random() * 9);
     //funkcja, która powoduje wybór losowy z tablicy, wybór następuje po cyfrach
     //Math.floor zaokrągla cyfrę losową
     //mnożymy razy ilosć elementów z tablicy pamiętając, że liczę się one od 0
-    answer.innerHTML = `<span>Odpowiedź:</span> ${answersArr[number]}`
-    //wstawianie losowego tekstu, odwolujemy się do tablicy i zmiennej number
-
+    answer.innerHTML = `<span>Odpowiedź:</span> ${answersArr[number]}`;
+    //wstawianie losowego tekstu, odwolujemy się do tablicy i zmiennej number.
 }
 
 
 
-imgBall.addEventListener('click', generateAnswer);
+imgBall.addEventListener('click', checkInput);
