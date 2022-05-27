@@ -7,16 +7,14 @@ const error = document.querySelector('.error');
 
 const answersArr = ['Tak', 'Nie', 'Lepiej, żebyś nie znał/a odpowiedzi', "Chciałbyś/abyś wiedzieć", "Pomidor!", "Hahaha!", "Odpowiedź masz w sobie. Wystarczy jej tylko poszukać", "Miał?", "Twoje pytanie jest zbyt trudne"]; ///8
 
+
+
+
+//3.
 const animationBall = () => {
-
     imgBall.classList.add('shake-animation');
-}
-
-
-function animationBallEnd(e) {
-    console.log(e);
-    // if(e)
-    // imgBall.classList.remove('shake-animation')
+    //aby móc poprawnie wywołać animację, trzeba opóźnieć wywołanie checkInput za pomocą setTimeout, inaczej animacja nie działa, bo równocześnie nadajemy i usuwamy klasę animacji
+    setTimeout(checkInput, 1000);
 }
 
 
@@ -26,11 +24,17 @@ const checkInput = () => {
         // metoda slice() sprawdza ostatni znak w stringu, w tym przypadku sprawdzamy czy mamy znak zapytania na końcu zdania
         generateAnswer();
         error.textContent = '';
+        imgBall.classList.remove('shake-animation');
     } else if (question.value !== '' && question.value.slice(-1) !== '?') {
         error.textContent = 'Pytanie musi być zakończone znakiem "?".';
+        answer.textContent = '';
+        imgBall.classList.remove('shake-animation');
+    } else {
+        error.textContent = 'Musisz zadać jakieś pytanie';
+        answer.textContent = ''
+        imgBall.classList.remove('shake-animation');
     }
 }
-
 
 //1.
 const generateAnswer = () => {
@@ -44,4 +48,4 @@ const generateAnswer = () => {
 
 
 
-imgBall.addEventListener('click', checkInput);
+imgBall.addEventListener('click', animationBall);
